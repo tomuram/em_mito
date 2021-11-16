@@ -15,7 +15,6 @@ ROOT='/eagle/BrainImagingML/turam/vs_mito/1073/train/theta_scripts'
 # in your checkpoints dir
 CHECKPOINT=$ROOT'/checkpoints/model.ckpt-41191'
 INPUT_VOLUME='/eagle/BrainImagingML/turam/vs_mito/1073/VS1073_Plaque1/image/'
-OUTPUT_VOLUME=output
 
 module load conda/tensorflow
 # Update this conda environment if you're using your own
@@ -27,7 +26,7 @@ orterun -hostfile $COBALT_NODEFILE -n $PROCS -npernode $PPN \
 	--input_offset='150,150,0' \
   --input_size='10060,11390,913' \
   --input_mip=1 \
-  --output_volume=$OUTPUT_VOLUME \
+  --output_volume=${ROOT}/output \
   --model_name='models.unets.unet_dtu_2_pad_concat' \
   --model_args="{\"fov_size\":[782,782,50],\"num_classes\":1}" \
   --model_checkpoint=$CHECKPOINT \
